@@ -3,12 +3,12 @@
 package org.dolphinemu.dolphinemu.features.settings.ui.viewholder
 
 import android.view.View
-import org.dolphinemu.dolphinemu.databinding.ListItemHeaderBinding
+import org.dolphinemu.dolphinemu.databinding.ListItemHeaderDolphinBinding
 import org.dolphinemu.dolphinemu.features.settings.model.view.SettingsItem
 import org.dolphinemu.dolphinemu.features.settings.ui.SettingsAdapter
 
 open class HeaderViewHolder(
-    private val binding: ListItemHeaderBinding,
+    private val binding: ListItemHeaderDolphinBinding,
     adapter: SettingsAdapter
 ) : SettingViewHolder(binding.root, adapter) {
     override val item: SettingsItem? = null

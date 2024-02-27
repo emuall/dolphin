@@ -12,7 +12,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import org.dolphinemu.dolphinemu.NativeLibrary
 import org.dolphinemu.dolphinemu.activities.EmulationActivity
-import org.dolphinemu.dolphinemu.databinding.FragmentEmulationBinding
+import org.dolphinemu.dolphinemu.databinding.FragmentEmulationDolphinBinding
 import org.dolphinemu.dolphinemu.features.settings.model.BooleanSetting
 import org.dolphinemu.dolphinemu.features.settings.model.Settings
 import org.dolphinemu.dolphinemu.overlay.InputOverlay
@@ -31,7 +31,7 @@ class EmulationFragment : Fragment(), SurfaceHolder.Callback {
 
     private var emulationActivity: EmulationActivity? = null
 
-    private var _binding: FragmentEmulationBinding? = null
+    private var _binding: FragmentEmulationDolphinBinding? = null
     private val binding get() = _binding!!
 
     override fun onAttach(context: Context) {
@@ -61,7 +61,7 @@ class EmulationFragment : Fragment(), SurfaceHolder.Callback {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentEmulationBinding.inflate(inflater, container, false)
+        _binding = FragmentEmulationDolphinBinding.inflate(inflater, container, false)
         return binding.root
     }
 

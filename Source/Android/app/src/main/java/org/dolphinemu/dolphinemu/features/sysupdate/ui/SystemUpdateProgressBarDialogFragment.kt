@@ -10,14 +10,14 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.dolphinemu.dolphinemu.R
-import org.dolphinemu.dolphinemu.databinding.DialogProgressBinding
-import org.dolphinemu.dolphinemu.databinding.DialogProgressTvBinding
+import org.dolphinemu.dolphinemu.databinding.DialogProgressDolphinBinding
+import org.dolphinemu.dolphinemu.databinding.DialogProgressTvDolphinBinding
 
 class SystemUpdateProgressBarDialogFragment : DialogFragment() {
     private lateinit var viewModel: SystemUpdateViewModel
 
-    private lateinit var binding: DialogProgressBinding
-    private lateinit var bindingTv: DialogProgressTvBinding
+    private lateinit var binding: DialogProgressDolphinBinding
+    private lateinit var bindingTv: DialogProgressTvDolphinBinding
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         viewModel = ViewModelProvider(requireActivity())[SystemUpdateViewModel::class.java]
@@ -31,7 +31,7 @@ class SystemUpdateProgressBarDialogFragment : DialogFragment() {
 
         // TODO: Remove dialog_progress_tv if we switch to an AppCompatActivity for leanback
         if (activity is AppCompatActivity) {
-            binding = DialogProgressBinding.inflate(layoutInflater)
+            binding = DialogProgressDolphinBinding.inflate(layoutInflater)
             progressDialogBuilder.setView(binding.root)
 
             viewModel.progressData.observe(
@@ -47,7 +47,7 @@ class SystemUpdateProgressBarDialogFragment : DialogFragment() {
                 binding.updateProgress.max = total
             }
         } else {
-            bindingTv = DialogProgressTvBinding.inflate(layoutInflater)
+            bindingTv = DialogProgressTvDolphinBinding.inflate(layoutInflater)
             progressDialogBuilder.setView(bindingTv.root)
 
             viewModel.progressData.observe(

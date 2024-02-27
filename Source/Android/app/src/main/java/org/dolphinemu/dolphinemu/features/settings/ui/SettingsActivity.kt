@@ -24,15 +24,13 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.color.MaterialColors
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.snackbar.Snackbar
 import org.dolphinemu.dolphinemu.NativeLibrary
 import org.dolphinemu.dolphinemu.R
-import org.dolphinemu.dolphinemu.databinding.ActivitySettingsBinding
+import org.dolphinemu.dolphinemu.databinding.ActivitySettingsDolphinBinding
 import org.dolphinemu.dolphinemu.features.settings.model.Settings
 import org.dolphinemu.dolphinemu.features.settings.ui.SettingsFragment.Companion.newInstance
 import org.dolphinemu.dolphinemu.ui.main.MainPresenter
 import org.dolphinemu.dolphinemu.utils.FileBrowserHelper
-import org.dolphinemu.dolphinemu.utils.GpuDriverInstallResult
 import org.dolphinemu.dolphinemu.utils.InsetsHelper
 import org.dolphinemu.dolphinemu.utils.SerializableHelper.serializable
 import org.dolphinemu.dolphinemu.utils.ThemeHelper.enableScrollTint
@@ -43,7 +41,7 @@ class SettingsActivity : AppCompatActivity(), SettingsActivityView {
     private var presenter: SettingsActivityPresenter? = null
     private var dialog: AlertDialog? = null
     private var toolbarLayout: CollapsingToolbarLayout? = null
-    private var binding: ActivitySettingsBinding? = null
+    private var binding: ActivitySettingsDolphinBinding? = null
 
     override var isMappingAllDevices = false
 
@@ -66,7 +64,7 @@ class SettingsActivity : AppCompatActivity(), SettingsActivityView {
             isMappingAllDevices = savedInstanceState.getBoolean(KEY_MAPPING_ALL_DEVICES)
         }
 
-        binding = ActivitySettingsBinding.inflate(layoutInflater)
+        binding = ActivitySettingsDolphinBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
 
         WindowCompat.setDecorFitsSystemWindows(window, false)
@@ -93,7 +91,7 @@ class SettingsActivity : AppCompatActivity(), SettingsActivityView {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater = menuInflater
-        inflater.inflate(R.menu.menu_settings, menu)
+        inflater.inflate(R.menu.menu_settings_dolphin, menu)
         return true
     }
 
@@ -210,7 +208,7 @@ class SettingsActivity : AppCompatActivity(), SettingsActivityView {
         if (dialog == null) {
             dialog = MaterialAlertDialogBuilder(this)
                 .setTitle(getString(R.string.load_settings))
-                .setView(R.layout.dialog_indeterminate_progress)
+                .setView(R.layout.dialog_indeterminate_progress_dolphin)
                 .create()
         }
         dialog!!.show()

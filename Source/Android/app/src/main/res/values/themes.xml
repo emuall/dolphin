@@ -150,7 +150,7 @@
         <item name="android:windowAllowReturnTransitionOverlap">true</item>
 
         <!-- Use CustomTitleView as the leanback title view. -->
-        <item name="browseTitleViewLayout">@layout/titleview</item>
+        <item name="browseTitleViewLayout">@layout/titleview_dolphin</item>
 
         <!-- Global AlertDialog Theme -->
         <item name="alertDialogTheme">@style/DolphinTVDialog</item>

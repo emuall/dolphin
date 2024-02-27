@@ -5,12 +5,12 @@ package org.dolphinemu.dolphinemu.features.settings.ui.viewholder
 import android.text.method.LinkMovementMethod
 import com.google.android.material.color.MaterialColors
 import org.dolphinemu.dolphinemu.R
-import org.dolphinemu.dolphinemu.databinding.ListItemHeaderBinding
+import org.dolphinemu.dolphinemu.databinding.ListItemHeaderDolphinBinding
 import org.dolphinemu.dolphinemu.features.settings.model.view.SettingsItem
 import org.dolphinemu.dolphinemu.features.settings.ui.SettingsAdapter
 
 class HeaderHyperLinkViewHolder(
-    private val binding: ListItemHeaderBinding,
+    private val binding: ListItemHeaderDolphinBinding,
     adapter: SettingsAdapter
 ) : HeaderViewHolder(binding, adapter) {
     init {

@@ -5,7 +5,7 @@ package org.dolphinemu.dolphinemu.features.settings.ui.viewholder
 import android.text.TextUtils
 import android.view.View
 import org.dolphinemu.dolphinemu.R
-import org.dolphinemu.dolphinemu.databinding.ListItemSettingBinding
+import org.dolphinemu.dolphinemu.databinding.ListItemSettingDolphinBinding
 import org.dolphinemu.dolphinemu.features.settings.model.view.FilePicker
 import org.dolphinemu.dolphinemu.features.settings.model.view.SettingsItem
 import org.dolphinemu.dolphinemu.features.settings.ui.SettingsAdapter
@@ -14,7 +14,7 @@ import org.dolphinemu.dolphinemu.utils.DirectoryInitialization
 import org.dolphinemu.dolphinemu.utils.FileBrowserHelper
 
 class FilePickerViewHolder(
-    private val binding: ListItemSettingBinding,
+    private val binding: ListItemSettingDolphinBinding,
     adapter: SettingsAdapter
 ) : SettingViewHolder(binding.getRoot(), adapter) {
     lateinit var setting: FilePicker

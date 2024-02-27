@@ -27,7 +27,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.dolphinemu.dolphinemu.R
-import org.dolphinemu.dolphinemu.databinding.ActivityCheatsBinding
+import org.dolphinemu.dolphinemu.databinding.ActivityCheatsDolphinBinding
 import org.dolphinemu.dolphinemu.features.cheats.model.Cheat
 import org.dolphinemu.dolphinemu.features.cheats.model.CheatsViewModel
 import org.dolphinemu.dolphinemu.features.cheats.model.GeckoCheat.Companion.downloadCodes
@@ -47,7 +47,7 @@ class CheatsActivity : AppCompatActivity(), PanelSlideListener {
     private var cheatListLastFocus: View? = null
     private var cheatDetailsLastFocus: View? = null
 
-    private lateinit var binding: ActivityCheatsBinding
+    private lateinit var binding: ActivityCheatsDolphinBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         ThemeHelper.setTheme(this)
@@ -66,7 +66,7 @@ class CheatsActivity : AppCompatActivity(), PanelSlideListener {
         viewModel = ViewModelProvider(this)[CheatsViewModel::class.java]
         viewModel.load(gameId!!, revision)
 
-        binding = ActivityCheatsBinding.inflate(layoutInflater)
+        binding = ActivityCheatsDolphinBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         WindowCompat.setDecorFitsSystemWindows(window, false)
@@ -106,7 +106,7 @@ class CheatsActivity : AppCompatActivity(), PanelSlideListener {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater = menuInflater
-        inflater.inflate(R.menu.menu_settings, menu)
+        inflater.inflate(R.menu.menu_settings_dolphin, menu)
         return true
     }
 
@@ -168,7 +168,7 @@ class CheatsActivity : AppCompatActivity(), PanelSlideListener {
     fun downloadGeckoCodes() {
         val progressDialog = MaterialAlertDialogBuilder(this)
             .setTitle(R.string.cheats_downloading)
-            .setView(R.layout.dialog_indeterminate_progress)
+            .setView(R.layout.dialog_indeterminate_progress_dolphin)
             .setCancelable(false)
             .show()
 

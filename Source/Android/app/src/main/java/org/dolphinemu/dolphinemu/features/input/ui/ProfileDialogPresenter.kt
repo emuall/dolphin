@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import androidx.fragment.app.DialogFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.dolphinemu.dolphinemu.R
-import org.dolphinemu.dolphinemu.databinding.DialogInputStringBinding
+import org.dolphinemu.dolphinemu.databinding.DialogInputStringDolphinBinding
 import org.dolphinemu.dolphinemu.features.settings.ui.MenuTag
 import org.dolphinemu.dolphinemu.features.settings.ui.SettingsActivityView
 import org.dolphinemu.dolphinemu.utils.DirectoryInitialization
@@ -77,7 +77,7 @@ class ProfileDialogPresenter {
 
     fun saveProfileAndPromptForName() {
         val inflater = LayoutInflater.from(context)
-        val binding = DialogInputStringBinding.inflate(inflater)
+        val binding = DialogInputStringDolphinBinding.inflate(inflater)
         val input = binding.input
 
         MaterialAlertDialogBuilder(context!!)

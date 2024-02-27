@@ -6,11 +6,11 @@ import android.content.Context
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import org.dolphinemu.dolphinemu.R
-import org.dolphinemu.dolphinemu.databinding.ListItemProfileBinding
+import org.dolphinemu.dolphinemu.databinding.ListItemProfileDolphinBinding
 
 class ProfileViewHolder(
     private val presenter: ProfileDialogPresenter,
-    private val binding: ListItemProfileBinding
+    private val binding: ListItemProfileDolphinBinding
 ) : RecyclerView.ViewHolder(binding.getRoot()) {
     private var profileName: String? = null
     private var stock = false

@@ -15,7 +15,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener
 import com.google.android.material.color.MaterialColors
 import org.dolphinemu.dolphinemu.R
 import org.dolphinemu.dolphinemu.adapters.GameAdapter
-import org.dolphinemu.dolphinemu.databinding.FragmentGridBinding
+import org.dolphinemu.dolphinemu.databinding.FragmentGridDolphinBinding
 import org.dolphinemu.dolphinemu.layout.AutofitGridLayoutManager
 import org.dolphinemu.dolphinemu.services.GameFileCacheManager
 
@@ -23,15 +23,15 @@ class PlatformGamesFragment : Fragment(), PlatformGamesView {
     private var swipeRefresh: SwipeRefreshLayout? = null
     private var onRefreshListener: OnRefreshListener? = null
 
-    private var _binding: FragmentGridBinding? = null
-    private val binding: FragmentGridBinding get() = _binding!!
+    private var _binding: FragmentGridDolphinBinding? = null
+    private val binding: FragmentGridDolphinBinding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentGridBinding.inflate(inflater, container, false)
+        _binding = FragmentGridDolphinBinding.inflate(inflater, container, false)
         return binding.root
     }
 

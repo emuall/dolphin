@@ -47,14 +47,14 @@
             android:name="org.dolphinemu.dolphinemu.features.cheats.ui.CheatListFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:layout="@layout/fragment_cheat_list" />
+            tools:layout="@layout/fragment_cheat_list_dolphin" />
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/cheat_details"
             android:name="org.dolphinemu.dolphinemu.features.cheats.ui.CheatDetailsFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:layout="@layout/fragment_cheat_details" />
+            tools:layout="@layout/fragment_cheat_details_dolphin" />
 
     </androidx.slidingpanelayout.widget.SlidingPaneLayout>
 

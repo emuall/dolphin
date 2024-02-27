@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.dolphinemu.dolphinemu.R
 import org.dolphinemu.dolphinemu.activities.EmulationActivity
-import org.dolphinemu.dolphinemu.databinding.ActivityRiivolutionBootBinding
+import org.dolphinemu.dolphinemu.databinding.ActivityRiivolutionBootDolphinBinding
 import org.dolphinemu.dolphinemu.features.riivolution.model.RiivolutionPatches
 import org.dolphinemu.dolphinemu.features.settings.model.StringSetting
 import org.dolphinemu.dolphinemu.utils.DirectoryInitialization
@@ -27,14 +27,14 @@ import org.dolphinemu.dolphinemu.utils.ThemeHelper
 
 class RiivolutionBootActivity : AppCompatActivity() {
     private var patches: RiivolutionPatches? = null
-    private lateinit var binding: ActivityRiivolutionBootBinding
+    private lateinit var binding: ActivityRiivolutionBootDolphinBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         ThemeHelper.setTheme(this)
 
         super.onCreate(savedInstanceState)
 
-        binding = ActivityRiivolutionBootBinding.inflate(layoutInflater)
+        binding = ActivityRiivolutionBootDolphinBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         WindowCompat.setDecorFitsSystemWindows(window, false)

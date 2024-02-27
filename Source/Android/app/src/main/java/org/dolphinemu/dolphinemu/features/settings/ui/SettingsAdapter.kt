@@ -63,55 +63,55 @@ class SettingsAdapter(
         val inflater = LayoutInflater.from(parent.context)
         return when (viewType) {
             SettingsItem.TYPE_HEADER -> HeaderViewHolder(
-                ListItemHeaderBinding.inflate(inflater),
+                ListItemHeaderDolphinBinding.inflate(inflater),
                 this
             )
             SettingsItem.TYPE_SWITCH -> SwitchSettingViewHolder(
-                ListItemSettingSwitchBinding.inflate(inflater),
+                ListItemSettingSwitchDolphinBinding.inflate(inflater),
                 this
             )
             SettingsItem.TYPE_STRING_SINGLE_CHOICE,
             SettingsItem.TYPE_SINGLE_CHOICE_DYNAMIC_DESCRIPTIONS,
             SettingsItem.TYPE_SINGLE_CHOICE -> SingleChoiceViewHolder(
-                ListItemSettingBinding.inflate(inflater),
+                ListItemSettingDolphinBinding.inflate(inflater),
                 this
             )
             SettingsItem.TYPE_SLIDER -> SliderViewHolder(
-                ListItemSettingBinding.inflate(
+                ListItemSettingDolphinBinding.inflate(
                     inflater
                 ), this, context
             )
             SettingsItem.TYPE_SUBMENU -> SubmenuViewHolder(
-                ListItemSubmenuBinding.inflate(
+                ListItemSubmenuDolphinBinding.inflate(
                     inflater
                 ), this
             )
             SettingsItem.TYPE_INPUT_MAPPING_CONTROL -> InputMappingControlSettingViewHolder(
-                ListItemMappingBinding.inflate(inflater),
+                ListItemMappingDolphinBinding.inflate(inflater),
                 this
             )
             SettingsItem.TYPE_FILE_PICKER -> FilePickerViewHolder(
-                ListItemSettingBinding.inflate(
+                ListItemSettingDolphinBinding.inflate(
                     inflater
                 ), this
             )
             SettingsItem.TYPE_RUN_RUNNABLE -> RunRunnableViewHolder(
-                ListItemSettingBinding.inflate(
+                ListItemSettingDolphinBinding.inflate(
                     inflater
                 ), this, context
             )
             SettingsItem.TYPE_STRING -> InputStringSettingViewHolder(
-                ListItemSettingBinding.inflate(
+                ListItemSettingDolphinBinding.inflate(
                     inflater
                 ), this
             )
             SettingsItem.TYPE_HYPERLINK_HEADER -> HeaderHyperLinkViewHolder(
-                ListItemHeaderBinding.inflate(
+                ListItemHeaderDolphinBinding.inflate(
                     inflater
                 ), this
             )
             SettingsItem.TYPE_DATETIME_CHOICE -> DateTimeSettingViewHolder(
-                ListItemSettingBinding.inflate(
+                ListItemSettingDolphinBinding.inflate(
                     inflater
                 ), this
             )
@@ -161,7 +161,7 @@ class SettingsAdapter(
 
     fun onInputStringClick(item: InputStringSetting, position: Int) {
         val inflater = LayoutInflater.from(context)
-        val binding = DialogInputStringBinding.inflate(inflater)
+        val binding = DialogInputStringDolphinBinding.inflate(inflater)
         val input = binding.input
         input.setText(item.selectedValue)
         dialog = MaterialAlertDialogBuilder(fragmentView.fragmentActivity)
@@ -236,7 +236,7 @@ class SettingsAdapter(
         }
 
         val inflater = LayoutInflater.from(fragmentView.fragmentActivity)
-        val binding = DialogSliderBinding.inflate(inflater)
+        val binding = DialogSliderDolphinBinding.inflate(inflater)
 
         textSliderValue = binding.textValue
         textSliderValue!!.text = if (item.showDecimal) {
@@ -318,7 +318,7 @@ class SettingsAdapter(
 
     fun onAdvancedInputMappingClick(item: InputMappingControlSetting, position: Int) {
         val inflater = LayoutInflater.from(context)
-        val binding = DialogAdvancedMappingBinding.inflate(inflater)
+        val binding = DialogAdvancedMappingDolphinBinding.inflate(inflater)
         val dialog = AdvancedMappingDialog(
             context,
             binding,

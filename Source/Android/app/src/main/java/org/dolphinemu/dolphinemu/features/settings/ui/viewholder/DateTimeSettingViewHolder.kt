@@ -4,7 +4,7 @@ package org.dolphinemu.dolphinemu.features.settings.ui.viewholder
 
 import android.text.TextUtils
 import android.view.View
-import org.dolphinemu.dolphinemu.databinding.ListItemSettingBinding
+import org.dolphinemu.dolphinemu.databinding.ListItemSettingDolphinBinding
 import org.dolphinemu.dolphinemu.features.settings.model.view.DateTimeChoiceSetting
 import org.dolphinemu.dolphinemu.features.settings.model.view.SettingsItem
 import org.dolphinemu.dolphinemu.features.settings.ui.SettingsAdapter
@@ -15,7 +15,7 @@ import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 
 class DateTimeSettingViewHolder(
-    private val binding: ListItemSettingBinding,
+    private val binding: ListItemSettingDolphinBinding,
     adapter: SettingsAdapter
 ) : SettingViewHolder(binding.root, adapter) {
     lateinit var setting: DateTimeChoiceSetting

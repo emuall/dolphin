@@ -18,7 +18,7 @@ import com.google.android.material.elevation.ElevationOverlayProvider
 import org.dolphinemu.dolphinemu.NativeLibrary
 import org.dolphinemu.dolphinemu.R
 import org.dolphinemu.dolphinemu.activities.EmulationActivity
-import org.dolphinemu.dolphinemu.databinding.FragmentIngameMenuBinding
+import org.dolphinemu.dolphinemu.databinding.FragmentIngameMenuDolphinBinding
 import org.dolphinemu.dolphinemu.features.settings.model.BooleanSetting
 import org.dolphinemu.dolphinemu.features.settings.model.IntSetting
 import org.dolphinemu.dolphinemu.utils.InsetsHelper
@@ -27,7 +27,7 @@ import org.dolphinemu.dolphinemu.utils.ThemeHelper
 class MenuFragment : Fragment(), View.OnClickListener {
     private var cutInset = 0
 
-    private var _binding: FragmentIngameMenuBinding? = null
+    private var _binding: FragmentIngameMenuDolphinBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -35,7 +35,7 @@ class MenuFragment : Fragment(), View.OnClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentIngameMenuBinding.inflate(inflater, container, false)
+        _binding = FragmentIngameMenuDolphinBinding.inflate(inflater, container, false)
         return binding.root
     }
 

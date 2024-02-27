@@ -9,10 +9,10 @@ import android.widget.AdapterView.OnItemClickListener
 import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.RecyclerView
 import org.dolphinemu.dolphinemu.R
-import org.dolphinemu.dolphinemu.databinding.ListItemRiivolutionBinding
+import org.dolphinemu.dolphinemu.databinding.ListItemRiivolutionDolphinBinding
 import org.dolphinemu.dolphinemu.features.riivolution.model.RiivolutionPatches
 
-class RiivolutionViewHolder(itemView: View, private val binding: ListItemRiivolutionBinding) :
+class RiivolutionViewHolder(itemView: View, private val binding: ListItemRiivolutionDolphinBinding) :
     RecyclerView.ViewHolder(itemView), OnItemClickListener {
     private lateinit var patches: RiivolutionPatches
     private lateinit var item: RiivolutionItem

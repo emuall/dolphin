@@ -15,8 +15,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.dolphinemu.dolphinemu.R
 import org.dolphinemu.dolphinemu.activities.EmulationActivity
-import org.dolphinemu.dolphinemu.databinding.DialogCreateSkylanderBinding
-import org.dolphinemu.dolphinemu.databinding.ListItemNfcFigureSlotBinding
+import org.dolphinemu.dolphinemu.databinding.DialogCreateSkylanderDolphinBinding
+import org.dolphinemu.dolphinemu.databinding.ListItemNfcFigureSlotDolphinBinding
 import org.dolphinemu.dolphinemu.features.skylanders.SkylanderConfig
 import org.dolphinemu.dolphinemu.features.skylanders.SkylanderConfig.removeSkylander
 import org.dolphinemu.dolphinemu.features.skylanders.model.SkylanderPair
@@ -25,14 +25,14 @@ class SkylanderSlotAdapter(
     private val slots: List<SkylanderSlot>,
     private val activity: EmulationActivity
 ) : RecyclerView.Adapter<SkylanderSlotAdapter.ViewHolder>(), OnItemClickListener {
-    class ViewHolder(var binding: ListItemNfcFigureSlotBinding) :
+    class ViewHolder(var binding: ListItemNfcFigureSlotDolphinBinding) :
         RecyclerView.ViewHolder(binding.getRoot())
 
-    private lateinit var binding: DialogCreateSkylanderBinding
+    private lateinit var binding: DialogCreateSkylanderDolphinBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = ListItemNfcFigureSlotBinding.inflate(inflater, parent, false)
+        val binding = ListItemNfcFigureSlotDolphinBinding.inflate(inflater, parent, false)
         return ViewHolder(binding)
     }
 
@@ -57,7 +57,7 @@ class SkylanderSlotAdapter(
         }
 
         val inflater = LayoutInflater.from(activity)
-        binding = DialogCreateSkylanderBinding.inflate(inflater)
+        binding = DialogCreateSkylanderDolphinBinding.inflate(inflater)
 
         val nameList = SkylanderConfig.REVERSE_LIST_SKYLANDERS.keys.toMutableList()
         nameList.sort()

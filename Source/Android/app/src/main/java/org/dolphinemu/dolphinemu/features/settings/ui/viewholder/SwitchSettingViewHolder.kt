@@ -4,7 +4,7 @@ package org.dolphinemu.dolphinemu.features.settings.ui.viewholder
 
 import android.view.View
 import android.widget.CompoundButton
-import org.dolphinemu.dolphinemu.databinding.ListItemSettingSwitchBinding
+import org.dolphinemu.dolphinemu.databinding.ListItemSettingSwitchDolphinBinding
 import org.dolphinemu.dolphinemu.features.settings.model.BooleanSetting
 import org.dolphinemu.dolphinemu.features.settings.model.view.SettingsItem
 import org.dolphinemu.dolphinemu.features.settings.model.view.SwitchSetting
@@ -14,7 +14,7 @@ import java.io.File
 import java.util.*
 
 class SwitchSettingViewHolder(
-    private val binding: ListItemSettingSwitchBinding,
+    private val binding: ListItemSettingSwitchDolphinBinding,
     adapter: SettingsAdapter
 ) : SettingViewHolder(binding.root, adapter) {
     private lateinit var setting: SwitchSetting

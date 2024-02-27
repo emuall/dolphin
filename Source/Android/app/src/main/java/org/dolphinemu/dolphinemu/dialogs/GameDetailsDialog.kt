@@ -17,8 +17,8 @@ import coil.imageLoader
 import coil.request.ImageRequest
 import kotlinx.coroutines.launch
 import org.dolphinemu.dolphinemu.NativeLibrary
-import org.dolphinemu.dolphinemu.databinding.DialogGameDetailsBinding
-import org.dolphinemu.dolphinemu.databinding.DialogGameDetailsTvBinding
+import org.dolphinemu.dolphinemu.databinding.DialogGameDetailsDolphinBinding
+import org.dolphinemu.dolphinemu.databinding.DialogGameDetailsTvDolphinBinding
 import org.dolphinemu.dolphinemu.model.GameFile
 
 class GameDetailsDialog : DialogFragment() {
@@ -29,11 +29,11 @@ class GameDetailsDialog : DialogFragment() {
         val fileSize = NativeLibrary.FormatSize(gameFile.getFileSize(), 2)
 
         // TODO: Remove dialog_game_details_tv if we switch to an AppCompatActivity for leanback
-        val binding: DialogGameDetailsBinding
-        val tvBinding: DialogGameDetailsTvBinding
+        val binding: DialogGameDetailsDolphinBinding
+        val tvBinding: DialogGameDetailsTvDolphinBinding
         val builder = MaterialAlertDialogBuilder(requireContext())
         if (requireActivity() is AppCompatActivity) {
-            binding = DialogGameDetailsBinding.inflate(layoutInflater)
+            binding = DialogGameDetailsDolphinBinding.inflate(layoutInflater)
             binding.apply {
                 textGameTitle.text = gameFile.getTitle()
                 textDescription.text = gameFile.getDescription()
@@ -85,7 +85,7 @@ class GameDetailsDialog : DialogFragment() {
 
             builder.setView(binding.root)
         } else {
-            tvBinding = DialogGameDetailsTvBinding.inflate(layoutInflater)
+            tvBinding = DialogGameDetailsTvDolphinBinding.inflate(layoutInflater)
             tvBinding.apply {
                 textGameTitle.text = gameFile.getTitle()
                 textDescription.text = gameFile.getDescription()

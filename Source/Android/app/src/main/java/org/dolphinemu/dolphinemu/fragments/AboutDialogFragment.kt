@@ -14,12 +14,12 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import org.dolphinemu.dolphinemu.BuildConfig
 import org.dolphinemu.dolphinemu.R
-import org.dolphinemu.dolphinemu.databinding.DialogAboutBinding
-import org.dolphinemu.dolphinemu.databinding.DialogAboutTvBinding
+import org.dolphinemu.dolphinemu.databinding.DialogAboutDolphinBinding
+import org.dolphinemu.dolphinemu.databinding.DialogAboutTvDolphinBinding
 
 class AboutDialogFragment : BottomSheetDialogFragment() {
-    private var _bindingMobile: DialogAboutBinding? = null
-    private var _bindingTv: DialogAboutTvBinding? = null
+    private var _bindingMobile: DialogAboutDolphinBinding? = null
+    private var _bindingTv: DialogAboutTvDolphinBinding? = null
 
     private val bindingMobile get() = _bindingMobile!!
     private val bindingTv get() = _bindingTv!!
@@ -30,10 +30,10 @@ class AboutDialogFragment : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View {
         if (activity is AppCompatActivity) {
-            _bindingMobile = DialogAboutBinding.inflate(layoutInflater)
+            _bindingMobile = DialogAboutDolphinBinding.inflate(layoutInflater)
             return bindingMobile.root
         }
-        _bindingTv = DialogAboutTvBinding.inflate(layoutInflater)
+        _bindingTv = DialogAboutTvDolphinBinding.inflate(layoutInflater)
         return bindingTv.root
     }
 

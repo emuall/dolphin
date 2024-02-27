@@ -3,13 +3,13 @@
 package org.dolphinemu.dolphinemu.features.settings.ui.viewholder
 
 import android.view.View
-import org.dolphinemu.dolphinemu.databinding.ListItemSubmenuBinding
+import org.dolphinemu.dolphinemu.databinding.ListItemSubmenuDolphinBinding
 import org.dolphinemu.dolphinemu.features.settings.model.view.SettingsItem
 import org.dolphinemu.dolphinemu.features.settings.model.view.SubmenuSetting
 import org.dolphinemu.dolphinemu.features.settings.ui.SettingsAdapter
 
 class SubmenuViewHolder(
-    private val mBinding: ListItemSubmenuBinding,
+    private val mBinding: ListItemSubmenuDolphinBinding,
     adapter: SettingsAdapter
 ) : SettingViewHolder(mBinding.root, adapter) {
     private lateinit var setting: SubmenuSetting

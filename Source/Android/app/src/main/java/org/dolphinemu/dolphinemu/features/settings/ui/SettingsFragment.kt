@@ -22,7 +22,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import org.dolphinemu.dolphinemu.R
-import org.dolphinemu.dolphinemu.databinding.FragmentSettingsBinding
+import org.dolphinemu.dolphinemu.databinding.FragmentSettingsDolphinBinding
 import org.dolphinemu.dolphinemu.features.settings.model.Settings
 import org.dolphinemu.dolphinemu.features.settings.model.view.SettingsItem
 import org.dolphinemu.dolphinemu.ui.main.MainActivity
@@ -45,7 +45,7 @@ class SettingsFragment : Fragment(), SettingsFragmentView {
 
     private var oldControllerSettingsWarningHeight = 0
 
-    private var binding: FragmentSettingsBinding? = null
+    private var binding: FragmentSettingsDolphinBinding? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -70,7 +70,7 @@ class SettingsFragment : Fragment(), SettingsFragmentView {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentSettingsBinding.inflate(inflater, container, false)
+        binding = FragmentSettingsDolphinBinding.inflate(inflater, container, false)
         return binding!!.root
     }
 

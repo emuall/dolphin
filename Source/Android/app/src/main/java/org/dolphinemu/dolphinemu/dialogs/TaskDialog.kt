@@ -19,7 +19,7 @@ class TaskDialog : DialogFragment() {
 
         val dialogBuilder = MaterialAlertDialogBuilder(requireContext())
             .setTitle(requireArguments().getInt(KEY_TITLE))
-            .setView(R.layout.dialog_indeterminate_progress)
+            .setView(R.layout.dialog_indeterminate_progress_dolphin)
         if (requireArguments().getBoolean(KEY_CANCELLABLE)) {
             dialogBuilder.setCancelable(true)
                 .setNegativeButton(android.R.string.cancel) { dialog: DialogInterface, _: Int ->

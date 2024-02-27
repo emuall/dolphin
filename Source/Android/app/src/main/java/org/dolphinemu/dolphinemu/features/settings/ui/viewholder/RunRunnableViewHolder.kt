@@ -8,13 +8,13 @@ import android.view.View
 import android.widget.Toast
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.dolphinemu.dolphinemu.R
-import org.dolphinemu.dolphinemu.databinding.ListItemSettingBinding
+import org.dolphinemu.dolphinemu.databinding.ListItemSettingDolphinBinding
 import org.dolphinemu.dolphinemu.features.settings.model.view.RunRunnable
 import org.dolphinemu.dolphinemu.features.settings.model.view.SettingsItem
 import org.dolphinemu.dolphinemu.features.settings.ui.SettingsAdapter
 
 class RunRunnableViewHolder(
-    private val mBinding: ListItemSettingBinding,
+    private val mBinding: ListItemSettingDolphinBinding,
     adapter: SettingsAdapter,
     private val mContext: Context
 ) : SettingViewHolder(mBinding.getRoot(), adapter) {

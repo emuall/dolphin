@@ -10,7 +10,7 @@ import android.widget.ArrayAdapter
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.divider.MaterialDividerItemDecoration
-import org.dolphinemu.dolphinemu.databinding.DialogAdvancedMappingBinding
+import org.dolphinemu.dolphinemu.databinding.DialogAdvancedMappingDolphinBinding
 import org.dolphinemu.dolphinemu.features.input.model.ControllerInterface
 import org.dolphinemu.dolphinemu.features.input.model.CoreDevice
 import org.dolphinemu.dolphinemu.features.input.model.MappingCommon
@@ -19,7 +19,7 @@ import org.dolphinemu.dolphinemu.features.input.model.controlleremu.EmulatedCont
 
 class AdvancedMappingDialog(
     context: Context,
-    private val binding: DialogAdvancedMappingBinding,
+    private val binding: DialogAdvancedMappingDolphinBinding,
     private val controlReference: ControlReference,
     private val controller: EmulatedController
 ) : AlertDialog(context), OnItemClickListener {

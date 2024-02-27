@@ -11,14 +11,14 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.divider.MaterialDividerItemDecoration
 import org.dolphinemu.dolphinemu.R
-import org.dolphinemu.dolphinemu.databinding.DialogInputProfilesBinding
+import org.dolphinemu.dolphinemu.databinding.DialogInputProfilesDolphinBinding
 import org.dolphinemu.dolphinemu.features.settings.ui.MenuTag
 import org.dolphinemu.dolphinemu.utils.SerializableHelper.serializable
 
 class ProfileDialog : BottomSheetDialogFragment() {
     private lateinit var presenter: ProfileDialogPresenter
 
-    private var _binding: DialogInputProfilesBinding? = null
+    private var _binding: DialogInputProfilesDolphinBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,7 +34,7 @@ class ProfileDialog : BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = DialogInputProfilesBinding.inflate(inflater, container, false)
+        _binding = DialogInputProfilesDolphinBinding.inflate(inflater, container, false)
         return binding.root
     }
 

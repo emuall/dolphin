@@ -29,7 +29,7 @@ class CustomTitleView @JvmOverloads constructor(
     }
 
     init {
-        val root = LayoutInflater.from(context).inflate(R.layout.tv_title, this)
+        val root = LayoutInflater.from(context).inflate(R.layout.tv_title_dolphin, this)
         titleView = root.findViewById(R.id.title)
         badgeView = root.findViewById(R.id.badge)
     }

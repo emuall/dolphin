@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
-            tools:listitem="@layout/card_game" />
+            tools:listitem="@layout/card_game_dolphin" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

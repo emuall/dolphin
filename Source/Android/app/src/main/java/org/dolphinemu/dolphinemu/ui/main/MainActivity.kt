@@ -21,7 +21,7 @@ import com.google.android.material.tabs.TabLayout
 import org.dolphinemu.dolphinemu.R
 import org.dolphinemu.dolphinemu.activities.EmulationActivity
 import org.dolphinemu.dolphinemu.adapters.PlatformPagerAdapter
-import org.dolphinemu.dolphinemu.databinding.ActivityMainBinding
+import org.dolphinemu.dolphinemu.databinding.ActivityMainDolphinBinding
 import org.dolphinemu.dolphinemu.features.settings.model.IntSetting
 import org.dolphinemu.dolphinemu.features.settings.model.NativeConfig
 import org.dolphinemu.dolphinemu.features.settings.ui.MenuTag
@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity(), MainView, OnRefreshListener, ThemeProv
 
     private val presenter = MainPresenter(this, this)
 
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainDolphinBinding
 
     private lateinit var menu: Menu
 
@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity(), MainView, OnRefreshListener, ThemeProv
 
         super.onCreate(savedInstanceState)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainDolphinBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         WindowCompat.setDecorFitsSystemWindows(window, false)
@@ -122,7 +122,7 @@ class MainActivity : AppCompatActivity(), MainView, OnRefreshListener, ThemeProv
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_game_grid, menu)
+        menuInflater.inflate(R.menu.menu_game_grid_dolphin, menu)
         this.menu = menu
         return true
     }

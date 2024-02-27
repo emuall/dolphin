@@ -17,7 +17,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.color.MaterialColors
 import org.dolphinemu.dolphinemu.R
-import org.dolphinemu.dolphinemu.databinding.ActivityUserDataBinding
+import org.dolphinemu.dolphinemu.databinding.ActivityUserDataDolphinBinding
 import org.dolphinemu.dolphinemu.dialogs.NotificationDialog
 import org.dolphinemu.dolphinemu.dialogs.TaskDialog
 import org.dolphinemu.dolphinemu.dialogs.UserDataImportWarningDialog
@@ -37,7 +37,7 @@ import java.util.zip.ZipOutputStream
 class UserDataActivity : AppCompatActivity() {
     private lateinit var taskViewModel: TaskViewModel
 
-    private lateinit var mBinding: ActivityUserDataBinding
+    private lateinit var mBinding: ActivityUserDataDolphinBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         taskViewModel = ViewModelProvider(this)[TaskViewModel::class.java]
@@ -46,7 +46,7 @@ class UserDataActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
 
-        mBinding = ActivityUserDataBinding.inflate(layoutInflater)
+        mBinding = ActivityUserDataDolphinBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
 
         WindowCompat.setDecorFitsSystemWindows(window, false)

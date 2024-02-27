@@ -7,9 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import org.dolphinemu.dolphinemu.R
-import org.dolphinemu.dolphinemu.databinding.ListItemCheatBinding
-import org.dolphinemu.dolphinemu.databinding.ListItemHeaderBinding
-import org.dolphinemu.dolphinemu.databinding.ListItemSubmenuBinding
+import org.dolphinemu.dolphinemu.databinding.ListItemCheatDolphinBinding
+import org.dolphinemu.dolphinemu.databinding.ListItemHeaderDolphinBinding
+import org.dolphinemu.dolphinemu.databinding.ListItemSubmenuDolphinBinding
 import org.dolphinemu.dolphinemu.features.cheats.model.CheatsViewModel
 import org.dolphinemu.dolphinemu.features.cheats.ui.CheatsActivity.Companion.setOnFocusChangeListenerRecursively
 
@@ -43,17 +43,17 @@ class CheatsAdapter(
         val inflater = LayoutInflater.from(parent.context)
         return when (viewType) {
             CheatItem.TYPE_CHEAT -> {
-                val listItemCheatBinding = ListItemCheatBinding.inflate(inflater)
+                val listItemCheatBinding = ListItemCheatDolphinBinding.inflate(inflater)
                 addViewListeners(listItemCheatBinding.getRoot())
                 CheatViewHolder(listItemCheatBinding)
             }
             CheatItem.TYPE_HEADER -> {
-                val listItemHeaderBinding = ListItemHeaderBinding.inflate(inflater)
+                val listItemHeaderBinding = ListItemHeaderDolphinBinding.inflate(inflater)
                 addViewListeners(listItemHeaderBinding.root)
                 HeaderViewHolder(listItemHeaderBinding)
             }
             CheatItem.TYPE_ACTION -> {
-                val listItemSubmenuBinding = ListItemSubmenuBinding.inflate(inflater)
+                val listItemSubmenuBinding = ListItemSubmenuDolphinBinding.inflate(inflater)
                 addViewListeners(listItemSubmenuBinding.root)
                 ActionViewHolder(listItemSubmenuBinding)
             }

@@ -15,12 +15,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.color.MaterialColors
 import com.google.android.material.elevation.ElevationOverlayProvider
 import org.dolphinemu.dolphinemu.R
-import org.dolphinemu.dolphinemu.databinding.FragmentCheatListBinding
+import org.dolphinemu.dolphinemu.databinding.FragmentCheatListDolphinBinding
 import org.dolphinemu.dolphinemu.features.cheats.model.CheatsViewModel
 import org.dolphinemu.dolphinemu.features.settings.ui.SettingsDividerItemDecoration
 
 class CheatListFragment : Fragment() {
-    private var _binding: FragmentCheatListBinding? = null
+    private var _binding: FragmentCheatListDolphinBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -28,7 +28,7 @@ class CheatListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentCheatListBinding.inflate(inflater, container, false)
+        _binding = FragmentCheatListDolphinBinding.inflate(inflater, container, false)
         return binding.root
     }
 

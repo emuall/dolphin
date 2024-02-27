@@ -3,9 +3,9 @@
 package org.dolphinemu.dolphinemu.features.cheats.ui
 
 import android.widget.TextView
-import org.dolphinemu.dolphinemu.databinding.ListItemHeaderBinding
+import org.dolphinemu.dolphinemu.databinding.ListItemHeaderDolphinBinding
 
-class HeaderViewHolder(binding: ListItemHeaderBinding) : CheatItemViewHolder(binding.root) {
+class HeaderViewHolder(binding: ListItemHeaderDolphinBinding) : CheatItemViewHolder(binding.root) {
     private val headerName: TextView
 
     init {

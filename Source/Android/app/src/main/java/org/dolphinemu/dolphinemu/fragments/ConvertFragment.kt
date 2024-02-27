@@ -22,8 +22,8 @@ import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import com.google.android.material.textfield.TextInputLayout
 import org.dolphinemu.dolphinemu.NativeLibrary
 import org.dolphinemu.dolphinemu.R
-import org.dolphinemu.dolphinemu.databinding.DialogProgressBinding
-import org.dolphinemu.dolphinemu.databinding.FragmentConvertBinding
+import org.dolphinemu.dolphinemu.databinding.DialogProgressDolphinBinding
+import org.dolphinemu.dolphinemu.databinding.FragmentConvertDolphinBinding
 import org.dolphinemu.dolphinemu.model.GameFile
 import org.dolphinemu.dolphinemu.services.GameFileCacheManager
 import org.dolphinemu.dolphinemu.ui.platform.Platform
@@ -76,7 +76,7 @@ class ConvertFragment : Fragment(), View.OnClickListener {
     @Volatile
     private var thread: Thread? = null
 
-    private var _binding: FragmentConvertBinding? = null
+    private var _binding: FragmentConvertDolphinBinding? = null
     val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -88,7 +88,7 @@ class ConvertFragment : Fragment(), View.OnClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentConvertBinding.inflate(inflater, container, false)
+        _binding = FragmentConvertDolphinBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -445,7 +445,7 @@ class ConvertFragment : Fragment(), View.OnClickListener {
 
         canceled = false
 
-        val dialogProgressBinding = DialogProgressBinding.inflate(layoutInflater, null, false)
+        val dialogProgressBinding = DialogProgressDolphinBinding.inflate(layoutInflater, null, false)
         dialogProgressBinding.updateProgress.max = PROGRESS_RESOLUTION
 
         val progressDialog = MaterialAlertDialogBuilder(context)

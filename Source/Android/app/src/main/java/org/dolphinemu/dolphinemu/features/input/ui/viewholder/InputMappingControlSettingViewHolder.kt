@@ -3,14 +3,14 @@
 package org.dolphinemu.dolphinemu.features.input.ui.viewholder
 
 import android.view.View
-import org.dolphinemu.dolphinemu.databinding.ListItemMappingBinding
+import org.dolphinemu.dolphinemu.databinding.ListItemMappingDolphinBinding
 import org.dolphinemu.dolphinemu.features.input.model.view.InputMappingControlSetting
 import org.dolphinemu.dolphinemu.features.settings.model.view.SettingsItem
 import org.dolphinemu.dolphinemu.features.settings.ui.SettingsAdapter
 import org.dolphinemu.dolphinemu.features.settings.ui.viewholder.SettingViewHolder
 
 class InputMappingControlSettingViewHolder(
-    private val binding: ListItemMappingBinding,
+    private val binding: ListItemMappingDolphinBinding,
     adapter: SettingsAdapter
 ) : SettingViewHolder(binding.getRoot(), adapter) {
     lateinit var setting: InputMappingControlSetting

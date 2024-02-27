@@ -12,21 +12,21 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.color.MaterialColors
 import org.dolphinemu.dolphinemu.R
-import org.dolphinemu.dolphinemu.databinding.ActivityConvertBinding
+import org.dolphinemu.dolphinemu.databinding.ActivityConvertDolphinBinding
 import org.dolphinemu.dolphinemu.fragments.ConvertFragment
 import org.dolphinemu.dolphinemu.fragments.ConvertFragment.Companion.newInstance
 import org.dolphinemu.dolphinemu.utils.InsetsHelper
 import org.dolphinemu.dolphinemu.utils.ThemeHelper
 
 class ConvertActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityConvertBinding
+    private lateinit var binding: ActivityConvertDolphinBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         ThemeHelper.setTheme(this)
 
         super.onCreate(savedInstanceState)
 
-        binding = ActivityConvertBinding.inflate(layoutInflater)
+        binding = ActivityConvertDolphinBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         WindowCompat.setDecorFitsSystemWindows(window, false)

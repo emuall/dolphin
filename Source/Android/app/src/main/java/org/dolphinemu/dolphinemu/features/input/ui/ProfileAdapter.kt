@@ -6,7 +6,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import org.dolphinemu.dolphinemu.databinding.ListItemProfileBinding
+import org.dolphinemu.dolphinemu.databinding.ListItemProfileDolphinBinding
 
 class ProfileAdapter(
     private val context: Context,
@@ -17,7 +17,7 @@ class ProfileAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProfileViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = ListItemProfileBinding.inflate(inflater, parent, false)
+        val binding = ListItemProfileDolphinBinding.inflate(inflater, parent, false)
         return ProfileViewHolder(presenter, binding)
     }
 

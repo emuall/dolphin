@@ -19,7 +19,7 @@ import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.dolphinemu.dolphinemu.databinding.CardGameBinding
+import org.dolphinemu.dolphinemu.databinding.CardGameDolphinBinding
 import org.dolphinemu.dolphinemu.dialogs.GamePropertiesDialog
 import org.dolphinemu.dolphinemu.features.settings.model.BooleanSetting
 import org.dolphinemu.dolphinemu.utils.CoilUtils
@@ -37,7 +37,7 @@ class GameAdapter : RecyclerView.Adapter<GameViewHolder>(),
      * @return The created ViewHolder with references to all the child view's members.
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameViewHolder {
-        val binding = CardGameBinding.inflate(LayoutInflater.from(parent.context))
+        val binding = CardGameDolphinBinding.inflate(LayoutInflater.from(parent.context))
         binding.root.apply {
             setOnClickListener(this@GameAdapter)
             setOnLongClickListener(this@GameAdapter)
@@ -93,7 +93,7 @@ class GameAdapter : RecyclerView.Adapter<GameViewHolder>(),
         }
     }
 
-    class GameViewHolder(var binding: CardGameBinding) : RecyclerView.ViewHolder(binding.root) {
+    class GameViewHolder(var binding: CardGameDolphinBinding) : RecyclerView.ViewHolder(binding.root) {
         var gameFile: GameFile? = null
 
         init {

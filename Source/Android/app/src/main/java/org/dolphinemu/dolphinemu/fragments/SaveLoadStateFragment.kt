@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment
 import org.dolphinemu.dolphinemu.NativeLibrary
 import org.dolphinemu.dolphinemu.R
 import org.dolphinemu.dolphinemu.activities.EmulationActivity
-import org.dolphinemu.dolphinemu.databinding.FragmentSaveloadStateBinding
+import org.dolphinemu.dolphinemu.databinding.FragmentSaveloadStateDolphinBinding
 import org.dolphinemu.dolphinemu.utils.SerializableHelper.serializable
 
 class SaveLoadStateFragment : Fragment(), View.OnClickListener {
@@ -21,7 +21,7 @@ class SaveLoadStateFragment : Fragment(), View.OnClickListener {
 
     private var saveOrLoad: SaveOrLoad? = null
 
-    private var _binding: FragmentSaveloadStateBinding? = null
+    private var _binding: FragmentSaveloadStateDolphinBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +30,7 @@ class SaveLoadStateFragment : Fragment(), View.OnClickListener {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        _binding = FragmentSaveloadStateBinding.inflate(inflater, container, false)
+        _binding = FragmentSaveloadStateDolphinBinding.inflate(inflater, container, false)
         return binding.root
     }
 

@@ -6,13 +6,13 @@ import android.view.View
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import org.dolphinemu.dolphinemu.R
-import org.dolphinemu.dolphinemu.databinding.ListItemSubmenuBinding
+import org.dolphinemu.dolphinemu.databinding.ListItemSubmenuDolphinBinding
 import org.dolphinemu.dolphinemu.features.cheats.model.ARCheat
 import org.dolphinemu.dolphinemu.features.cheats.model.CheatsViewModel
 import org.dolphinemu.dolphinemu.features.cheats.model.GeckoCheat
 import org.dolphinemu.dolphinemu.features.cheats.model.PatchCheat
 
-class ActionViewHolder(binding: ListItemSubmenuBinding) : CheatItemViewHolder(binding.root),
+class ActionViewHolder(binding: ListItemSubmenuDolphinBinding) : CheatItemViewHolder(binding.root),
     View.OnClickListener {
     private val mName: TextView
 

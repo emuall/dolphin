@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.dolphinemu.dolphinemu.R
-import org.dolphinemu.dolphinemu.databinding.FragmentCheatDetailsBinding
+import org.dolphinemu.dolphinemu.databinding.FragmentCheatDetailsDolphinBinding
 import org.dolphinemu.dolphinemu.features.cheats.model.Cheat
 import org.dolphinemu.dolphinemu.features.cheats.model.CheatsViewModel
 
@@ -19,7 +19,7 @@ class CheatDetailsFragment : Fragment() {
     private lateinit var viewModel: CheatsViewModel
     private var cheat: Cheat? = null
 
-    private var _binding: FragmentCheatDetailsBinding? = null
+    private var _binding: FragmentCheatDetailsDolphinBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -27,7 +27,7 @@ class CheatDetailsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentCheatDetailsBinding.inflate(inflater, container, false)
+        _binding = FragmentCheatDetailsDolphinBinding.inflate(inflater, container, false)
         return binding.getRoot()
     }
 

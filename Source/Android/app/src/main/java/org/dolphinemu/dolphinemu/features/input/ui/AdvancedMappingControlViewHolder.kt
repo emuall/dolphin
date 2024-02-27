@@ -3,11 +3,11 @@
 package org.dolphinemu.dolphinemu.features.input.ui
 
 import androidx.recyclerview.widget.RecyclerView
-import org.dolphinemu.dolphinemu.databinding.ListItemAdvancedMappingControlBinding
+import org.dolphinemu.dolphinemu.databinding.ListItemAdvancedMappingControlDolphinBinding
 import java.util.function.Consumer
 
 class AdvancedMappingControlViewHolder(
-    private val binding: ListItemAdvancedMappingControlBinding,
+    private val binding: ListItemAdvancedMappingControlDolphinBinding,
     onClickCallback: Consumer<String>
 ) : RecyclerView.ViewHolder(binding.root) {
     private lateinit var name: String

@@ -2,7 +2,6 @@
 
 package org.dolphinemu.dolphinemu.activities
 
-import android.annotation.SuppressLint
 import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Rect
@@ -28,9 +27,9 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.slider.Slider
 import org.dolphinemu.dolphinemu.NativeLibrary
 import org.dolphinemu.dolphinemu.R
-import org.dolphinemu.dolphinemu.databinding.ActivityEmulationBinding
-import org.dolphinemu.dolphinemu.databinding.DialogInputAdjustBinding
-import org.dolphinemu.dolphinemu.databinding.DialogNfcFiguresManagerBinding
+import org.dolphinemu.dolphinemu.databinding.ActivityEmulationDolphinBinding
+import org.dolphinemu.dolphinemu.databinding.DialogInputAdjustDolphinBinding
+import org.dolphinemu.dolphinemu.databinding.DialogNfcFiguresManagerDolphinBinding
 import org.dolphinemu.dolphinemu.features.infinitybase.InfinityConfig
 import org.dolphinemu.dolphinemu.features.infinitybase.model.Figure
 import org.dolphinemu.dolphinemu.features.infinitybase.ui.FigureSlot
@@ -81,10 +80,10 @@ class EmulationActivity : AppCompatActivity(), ThemeProvider {
     private var skylanderSlot = -1
     private var infinityPosition = -1
     private var infinityListPosition = -1
-    private lateinit var skylandersBinding: DialogNfcFiguresManagerBinding
-    private lateinit var infinityBinding: DialogNfcFiguresManagerBinding
+    private lateinit var skylandersBinding: DialogNfcFiguresManagerDolphinBinding
+    private lateinit var infinityBinding: DialogNfcFiguresManagerDolphinBinding
 
-    private lateinit var binding: ActivityEmulationBinding
+    private lateinit var binding: ActivityEmulationDolphinBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         ThemeHelper.setTheme(this)
@@ -113,7 +112,7 @@ class EmulationActivity : AppCompatActivity(), ThemeProvider {
         // Set these options now so that the SurfaceView the game renders into is the right size.
         enableFullscreenImmersive()
 
-        binding = ActivityEmulationBinding.inflate(layoutInflater)
+        binding = ActivityEmulationDolphinBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setInsets()
@@ -405,7 +404,7 @@ class EmulationActivity : AppCompatActivity(), ThemeProvider {
         val popup = PopupMenu(this, anchor)
         val menu = popup.menu
         val wii = NativeLibrary.IsEmulatingWii()
-        val id = if (wii) R.menu.menu_overlay_controls_wii else R.menu.menu_overlay_controls_gc
+        val id = if (wii) R.menu.menu_overlay_controls_wii_dolphin else R.menu.menu_overlay_controls_gc_dolphin
         popup.menuInflater.inflate(id, menu)
 
         // Populate the switch value for joystick center on touch
@@ -699,7 +698,7 @@ class EmulationActivity : AppCompatActivity(), ThemeProvider {
     }
 
     private fun adjustScale() {
-        val dialogBinding = DialogInputAdjustBinding.inflate(layoutInflater)
+        val dialogBinding = DialogInputAdjustDolphinBinding.inflate(layoutInflater)
         dialogBinding.apply {
             inputScaleSlider.apply {
                 valueTo = 150f
@@ -868,7 +867,7 @@ class EmulationActivity : AppCompatActivity(), ThemeProvider {
     }
 
     private fun showSkylanderPortalSettings() {
-        skylandersBinding = DialogNfcFiguresManagerBinding.inflate(layoutInflater)
+        skylandersBinding = DialogNfcFiguresManagerDolphinBinding.inflate(layoutInflater)
         skylandersBinding.figureManager.apply {
             layoutManager = LinearLayoutManager(this@EmulationActivity)
             adapter = SkylanderSlotAdapter(skylanderSlots, this@EmulationActivity)
@@ -881,7 +880,7 @@ class EmulationActivity : AppCompatActivity(), ThemeProvider {
     }
 
     private fun showInfinityBaseSettings() {
-        infinityBinding = DialogNfcFiguresManagerBinding.inflate(layoutInflater)
+        infinityBinding = DialogNfcFiguresManagerDolphinBinding.inflate(layoutInflater)
         infinityBinding.figureManager.apply {
             layoutManager = LinearLayoutManager(this@EmulationActivity)
             adapter = FigureSlotAdapter(infinityFigures, this@EmulationActivity)

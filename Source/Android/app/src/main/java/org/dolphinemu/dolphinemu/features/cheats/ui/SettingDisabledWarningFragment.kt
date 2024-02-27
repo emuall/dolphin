@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import org.dolphinemu.dolphinemu.databinding.FragmentCheatWarningBinding
+import org.dolphinemu.dolphinemu.databinding.FragmentCheatWarningDolphinBinding
 import org.dolphinemu.dolphinemu.features.cheats.ui.CheatsActivity.Companion.setOnFocusChangeListenerRecursively
 import org.dolphinemu.dolphinemu.features.settings.model.AbstractBooleanSetting
 import org.dolphinemu.dolphinemu.features.settings.ui.MenuTag
@@ -18,7 +18,7 @@ abstract class SettingDisabledWarningFragment(
     private val settingShortcut: MenuTag,
     private val text: Int
 ) : Fragment(), View.OnClickListener {
-    private var _binding: FragmentCheatWarningBinding? = null
+    private var _binding: FragmentCheatWarningDolphinBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -26,7 +26,7 @@ abstract class SettingDisabledWarningFragment(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentCheatWarningBinding.inflate(inflater, container, false)
+        _binding = FragmentCheatWarningDolphinBinding.inflate(inflater, container, false)
         return binding.root
     }
 

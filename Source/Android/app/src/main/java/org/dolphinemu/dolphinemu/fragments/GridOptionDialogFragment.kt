@@ -11,8 +11,8 @@ import org.dolphinemu.dolphinemu.features.settings.model.BooleanSetting
 import android.widget.CompoundButton
 import androidx.appcompat.app.AppCompatActivity
 import org.dolphinemu.dolphinemu.R
-import org.dolphinemu.dolphinemu.databinding.FragmentGridOptionsBinding
-import org.dolphinemu.dolphinemu.databinding.FragmentGridOptionsTvBinding
+import org.dolphinemu.dolphinemu.databinding.FragmentGridOptionsDolphinBinding
+import org.dolphinemu.dolphinemu.databinding.FragmentGridOptionsTvDolphinBinding
 import org.dolphinemu.dolphinemu.features.settings.model.NativeConfig
 import org.dolphinemu.dolphinemu.ui.main.MainView
 
@@ -20,8 +20,8 @@ class GridOptionDialogFragment : BottomSheetDialogFragment() {
 
     private lateinit var mView: MainView
 
-    private var _mBindingMobile: FragmentGridOptionsBinding? = null
-    private var _mBindingTv: FragmentGridOptionsTvBinding? = null
+    private var _mBindingMobile: FragmentGridOptionsDolphinBinding? = null
+    private var _mBindingTv: FragmentGridOptionsTvDolphinBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -36,10 +36,10 @@ class GridOptionDialogFragment : BottomSheetDialogFragment() {
 
         if (activity is AppCompatActivity)
         {
-            _mBindingMobile = FragmentGridOptionsBinding.inflate(inflater, container, false)
+            _mBindingMobile = FragmentGridOptionsDolphinBinding.inflate(inflater, container, false)
             return mBindingMobile.root
         }
-        _mBindingTv = FragmentGridOptionsTvBinding.inflate(inflater, container, false)
+        _mBindingTv = FragmentGridOptionsTvDolphinBinding.inflate(inflater, container, false)
         return mBindingTv.root
     }
 

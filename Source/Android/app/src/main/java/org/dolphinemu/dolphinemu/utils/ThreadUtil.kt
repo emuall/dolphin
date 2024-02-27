@@ -21,7 +21,7 @@ object ThreadUtil {
         val resources = activity.resources
         val progressDialog = MaterialAlertDialogBuilder(activity)
             .setTitle(progressTitle)
-            .setView(R.layout.dialog_indeterminate_progress)
+            .setView(R.layout.dialog_indeterminate_progress_dolphin)
             .setCancelable(false)
             .create()
         if (progressMessage != 0) progressDialog.setMessage(resources.getString(progressMessage))

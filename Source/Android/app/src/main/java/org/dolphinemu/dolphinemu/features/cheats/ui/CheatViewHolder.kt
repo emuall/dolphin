@@ -5,11 +5,11 @@ package org.dolphinemu.dolphinemu.features.cheats.ui
 import android.view.View
 import android.widget.CompoundButton
 import androidx.lifecycle.ViewModelProvider
-import org.dolphinemu.dolphinemu.databinding.ListItemCheatBinding
+import org.dolphinemu.dolphinemu.databinding.ListItemCheatDolphinBinding
 import org.dolphinemu.dolphinemu.features.cheats.model.Cheat
 import org.dolphinemu.dolphinemu.features.cheats.model.CheatsViewModel
 
-class CheatViewHolder(private val binding: ListItemCheatBinding) :
+class CheatViewHolder(private val binding: ListItemCheatDolphinBinding) :
     CheatItemViewHolder(binding.getRoot()),
     View.OnClickListener,
     CompoundButton.OnCheckedChangeListener {

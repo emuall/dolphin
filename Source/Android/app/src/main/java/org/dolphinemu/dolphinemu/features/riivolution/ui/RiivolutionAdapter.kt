@@ -6,7 +6,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import org.dolphinemu.dolphinemu.databinding.ListItemRiivolutionBinding
+import org.dolphinemu.dolphinemu.databinding.ListItemRiivolutionDolphinBinding
 import org.dolphinemu.dolphinemu.features.riivolution.model.RiivolutionPatches
 
 class RiivolutionAdapter(private val context: Context, private val patches: RiivolutionPatches) :
@@ -32,7 +32,7 @@ class RiivolutionAdapter(private val context: Context, private val patches: Riiv
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RiivolutionViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = ListItemRiivolutionBinding.inflate(inflater)
+        val binding = ListItemRiivolutionDolphinBinding.inflate(inflater)
         return RiivolutionViewHolder(binding.root, binding)
     }
 

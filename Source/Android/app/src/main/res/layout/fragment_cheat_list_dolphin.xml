@@ -16,7 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/gfx_mods_warning"
-        tools:layout="@layout/fragment_cheat_warning" />
+        tools:layout="@layout/fragment_cheat_warning_dolphin" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/gfx_mods_warning"
@@ -28,7 +28,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cheats_warning"
         app:layout_constraintBottom_toTopOf="@id/cheat_list"
-        tools:layout="@layout/fragment_cheat_warning" />
+        tools:layout="@layout/fragment_cheat_warning_dolphin" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cheat_list"

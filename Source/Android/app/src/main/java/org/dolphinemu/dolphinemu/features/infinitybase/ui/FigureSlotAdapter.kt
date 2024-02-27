@@ -15,8 +15,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.dolphinemu.dolphinemu.R
 import org.dolphinemu.dolphinemu.activities.EmulationActivity
-import org.dolphinemu.dolphinemu.databinding.DialogCreateInfinityFigureBinding
-import org.dolphinemu.dolphinemu.databinding.ListItemNfcFigureSlotBinding
+import org.dolphinemu.dolphinemu.databinding.DialogCreateInfinityFigureDolphinBinding
+import org.dolphinemu.dolphinemu.databinding.ListItemNfcFigureSlotDolphinBinding
 import org.dolphinemu.dolphinemu.features.infinitybase.InfinityConfig
 import org.dolphinemu.dolphinemu.features.infinitybase.InfinityConfig.removeFigure
 
@@ -26,17 +26,17 @@ class FigureSlotAdapter(
 ) : RecyclerView.Adapter<FigureSlotAdapter.ViewHolder>(),
     OnItemClickListener {
 
-    class ViewHolder(var binding: ListItemNfcFigureSlotBinding) :
+    class ViewHolder(var binding: ListItemNfcFigureSlotDolphinBinding) :
         RecyclerView.ViewHolder(binding.getRoot())
 
-    private lateinit var binding: DialogCreateInfinityFigureBinding
+    private lateinit var binding: DialogCreateInfinityFigureDolphinBinding
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = ListItemNfcFigureSlotBinding.inflate(inflater, parent, false)
+        val binding = ListItemNfcFigureSlotDolphinBinding.inflate(inflater, parent, false)
         return ViewHolder(binding)
     }
 
@@ -61,7 +61,7 @@ class FigureSlotAdapter(
         }
 
         val inflater = LayoutInflater.from(activity)
-        binding = DialogCreateInfinityFigureBinding.inflate(inflater)
+        binding = DialogCreateInfinityFigureDolphinBinding.inflate(inflater)
 
         binding.infinityDropdown.onItemClickListener = this
 

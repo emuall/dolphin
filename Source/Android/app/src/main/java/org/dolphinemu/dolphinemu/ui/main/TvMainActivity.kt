@@ -23,7 +23,7 @@ import org.dolphinemu.dolphinemu.R
 import org.dolphinemu.dolphinemu.activities.EmulationActivity
 import org.dolphinemu.dolphinemu.adapters.GameRowPresenter
 import org.dolphinemu.dolphinemu.adapters.SettingsRowPresenter
-import org.dolphinemu.dolphinemu.databinding.ActivityTvMainBinding
+import org.dolphinemu.dolphinemu.databinding.ActivityTvMainDolphinBinding
 import org.dolphinemu.dolphinemu.features.settings.ui.MenuTag
 import org.dolphinemu.dolphinemu.features.settings.ui.SettingsActivity
 import org.dolphinemu.dolphinemu.fragments.GridOptionDialogFragment
@@ -47,13 +47,13 @@ class TvMainActivity : FragmentActivity(), MainView, OnRefreshListener {
 
     private val gameRows = ArrayList<ArrayObjectAdapter>()
 
-    private lateinit var binding: ActivityTvMainBinding
+    private lateinit var binding: ActivityTvMainDolphinBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen().setKeepOnScreenCondition { !DirectoryInitialization.areDolphinDirectoriesReady() }
 
         super.onCreate(savedInstanceState)
-        binding = ActivityTvMainBinding.inflate(layoutInflater)
+        binding = ActivityTvMainDolphinBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setupUI()

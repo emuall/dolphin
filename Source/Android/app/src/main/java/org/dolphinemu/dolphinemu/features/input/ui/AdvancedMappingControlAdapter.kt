@@ -5,7 +5,7 @@ package org.dolphinemu.dolphinemu.features.input.ui
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import org.dolphinemu.dolphinemu.databinding.ListItemAdvancedMappingControlBinding
+import org.dolphinemu.dolphinemu.databinding.ListItemAdvancedMappingControlDolphinBinding
 import java.util.function.Consumer
 
 class AdvancedMappingControlAdapter(private val onClickCallback: Consumer<String>) :
@@ -17,7 +17,7 @@ class AdvancedMappingControlAdapter(private val onClickCallback: Consumer<String
         viewType: Int
     ): AdvancedMappingControlViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = ListItemAdvancedMappingControlBinding.inflate(inflater)
+        val binding = ListItemAdvancedMappingControlDolphinBinding.inflate(inflater)
         return AdvancedMappingControlViewHolder(binding, onClickCallback)
     }
 
