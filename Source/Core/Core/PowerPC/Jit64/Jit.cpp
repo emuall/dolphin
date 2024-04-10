@@ -1041,7 +1041,18 @@ bool Jit64::DoJit(u32 em_address, JitBlock* b, u32 nextPC)
     if (HandleFunctionHooking(op.address))
       break;
 
-    if (!op.skip)
+    if (op.skip)
+    {
+      if (IsDebuggingEnabled())
+      {
+        // The only thing that currently sets op.skip is the BLR following optimization.
+        // If any non-branch instruction starts setting that too, this will need to be changed.
+        ASSERT(op.inst.hex == 0x4e800020);
+        WriteBranchWatch<true>(op.address, op.branchTo, op.inst, RSCRATCH, RSCRATCH2,
+                               CallerSavedRegistersInUse());
+      }
+    }
+    else
     {
       if ((opinfo->flags & FL_USE_FPU) && !js.firstFPInstructionFound)
       {
@@ -1274,7 +1285,7 @@ void Jit64::IntializeSpeculativeConstants()
 
 bool Jit64::HandleFunctionHooking(u32 address)
 {
-  const auto result = HLE::TryReplaceFunction(address, PowerPC::CoreMode::JIT);
+  const auto result = HLE::TryReplaceFunction(m_ppc_symbol_db, address, PowerPC::CoreMode::JIT);
   if (!result)
     return false;
 

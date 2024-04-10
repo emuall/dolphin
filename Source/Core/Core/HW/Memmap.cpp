@@ -409,7 +409,7 @@ u8* MemoryManager::GetPointerForRange(u32 address, size_t size) const
 
   // Check that the beginning and end of the range are valid
   u8* pointer = GetPointer(address);
-  if (!pointer || !GetPointer(address + u32(size) - 1))
+  if (pointer == nullptr || (size != 0 && GetPointer(address + u32(size) - 1) == nullptr))
   {
     // A panic alert has already been raised by GetPointer
     return nullptr;
@@ -462,18 +462,28 @@ void MemoryManager::Memset(u32 address, u8 value, size_t size)
 
 std::string MemoryManager::GetString(u32 em_address, size_t size)
 {
-  const char* ptr = reinterpret_cast<const char*>(GetPointer(em_address));
-  if (ptr == nullptr)
-    return "";
+  std::string result;
 
   if (size == 0)  // Null terminated string.
   {
-    return std::string(ptr);
+    while (true)
+    {
+      const u8 value = Read_U8(em_address);
+      if (value == 0)
+        break;
+
+      result.push_back(value);
+      ++em_address;
+    }
+    return result;
   }
   else  // Fixed size string, potentially null terminated or null padded.
   {
-    size_t length = strnlen(ptr, size);
-    return std::string(ptr, length);
+    result.resize(size);
+    CopyFromEmu(result.data(), em_address, size);
+    size_t length = strnlen(result.data(), size);
+    result.resize(length);
+    return result;
   }
 }
 

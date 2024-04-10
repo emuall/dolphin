@@ -138,7 +138,7 @@ void JitInterface::WriteProfileResults(const std::string& filename) const
                 "ms)\tblkCodeSize\n");
   for (auto& stat : prof_stats.block_stats)
   {
-    std::string name = g_symbolDB.GetDescription(stat.addr);
+    std::string name = m_system.GetPPCSymbolDB().GetDescription(stat.addr);
     double percent = 100.0 * (double)stat.cost / (double)prof_stats.cost_sum;
     double timePercent = 100.0 * (double)stat.tick_counter / (double)prof_stats.timecost_sum;
     f.WriteString(fmt::format("{0:08x}\t{1}\t{2}\t{3}\t{4}\t{5:.2f}\t{6:.2f}\t{7:.2f}\t{8}\n",
@@ -160,22 +160,21 @@ void JitInterface::GetProfileResults(Profiler::ProfileStats* prof_stats) const
   prof_stats->timecost_sum = 0;
   prof_stats->block_stats.clear();
 
-  Core::RunAsCPUThread([this, &prof_stats] {
-    QueryPerformanceFrequency((LARGE_INTEGER*)&prof_stats->countsPerSec);
-    m_jit->GetBlockCache()->RunOnBlocks([&prof_stats](const JitBlock& block) {
-      const auto& data = block.profile_data;
-      u64 cost = data.downcountCounter;
-      u64 timecost = data.ticCounter;
-      // Todo: tweak.
-      if (data.runCount >= 1)
-        prof_stats->block_stats.emplace_back(block.effectiveAddress, cost, timecost, data.runCount,
-                                             block.codeSize);
-      prof_stats->cost_sum += cost;
-      prof_stats->timecost_sum += timecost;
-    });
-
-    sort(prof_stats->block_stats.begin(), prof_stats->block_stats.end());
+  const Core::CPUThreadGuard guard(m_system);
+  QueryPerformanceFrequency((LARGE_INTEGER*)&prof_stats->countsPerSec);
+  m_jit->GetBlockCache()->RunOnBlocks([&prof_stats](const JitBlock& block) {
+    const auto& data = block.profile_data;
+    u64 cost = data.downcountCounter;
+    u64 timecost = data.ticCounter;
+    // Todo: tweak.
+    if (data.runCount >= 1)
+      prof_stats->block_stats.emplace_back(block.effectiveAddress, cost, timecost, data.runCount,
+                                           block.codeSize);
+    prof_stats->cost_sum += cost;
+    prof_stats->timecost_sum += timecost;
   });
+
+  sort(prof_stats->block_stats.begin(), prof_stats->block_stats.end());
 }
 
 std::variant<JitInterface::GetHostCodeError, JitInterface::GetHostCodeResult>
@@ -241,7 +240,7 @@ bool JitInterface::HandleStackFault()
   return m_jit->HandleStackFault();
 }
 
-void JitInterface::ClearCache()
+void JitInterface::ClearCache(const Core::CPUThreadGuard&)
 {
   if (m_jit)
     m_jit->ClearCache();

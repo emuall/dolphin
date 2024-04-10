@@ -781,7 +781,7 @@ void JitArm64::WriteConditionalExceptionExit(int exception, ARM64Reg temp_gpr, A
 
 bool JitArm64::HandleFunctionHooking(u32 address)
 {
-  const auto result = HLE::TryReplaceFunction(address, PowerPC::CoreMode::JIT);
+  const auto result = HLE::TryReplaceFunction(m_ppc_symbol_db, address, PowerPC::CoreMode::JIT);
   if (!result)
     return false;
 
@@ -1181,7 +1181,22 @@ bool JitArm64::DoJit(u32 em_address, JitBlock* b, u32 nextPC)
     if (HandleFunctionHooking(op.address))
       break;
 
-    if (!op.skip)
+    if (op.skip)
+    {
+      if (IsDebuggingEnabled())
+      {
+        // The only thing that currently sets op.skip is the BLR following optimization.
+        // If any non-branch instruction starts setting that too, this will need to be changed.
+        ASSERT(op.inst.hex == 0x4e800020);
+        const ARM64Reg bw_reg_a = gpr.GetReg(), bw_reg_b = gpr.GetReg();
+        const BitSet32 gpr_caller_save =
+            gpr.GetCallerSavedUsed() & ~BitSet32{DecodeReg(bw_reg_a), DecodeReg(bw_reg_b)};
+        WriteBranchWatch<true>(op.address, op.branchTo, op.inst, bw_reg_a, bw_reg_b,
+                               gpr_caller_save, fpr.GetCallerSavedUsed());
+        gpr.Unlock(bw_reg_a, bw_reg_b);
+      }
+    }
+    else
     {
       if ((opinfo->flags & FL_USE_FPU) && !js.firstFPInstructionFound)
       {

@@ -138,7 +138,8 @@ constexpr int CODE_VIEW_COLUMN_DESCRIPTION = 4;
 constexpr int CODE_VIEW_COLUMN_BRANCH_ARROWS = 5;
 constexpr int CODE_VIEW_COLUMNCOUNT = 6;
 
-CodeViewWidget::CodeViewWidget() : m_system(Core::System::GetInstance())
+CodeViewWidget::CodeViewWidget()
+    : m_system(Core::System::GetInstance()), m_ppc_symbol_db(m_system.GetPPCSymbolDB())
 {
   setColumnCount(CODE_VIEW_COLUMNCOUNT);
   setShowGrid(false);
@@ -171,9 +172,8 @@ CodeViewWidget::CodeViewWidget() : m_system(Core::System::GetInstance())
 
   connect(this, &CodeViewWidget::customContextMenuRequested, this, &CodeViewWidget::OnContextMenu);
   connect(this, &CodeViewWidget::itemSelectionChanged, this, &CodeViewWidget::OnSelectionChanged);
-  connect(&Settings::Instance(), &Settings::DebugFontChanged, this, &QWidget::setFont);
   connect(&Settings::Instance(), &Settings::DebugFontChanged, this,
-          &CodeViewWidget::FontBasedSizing);
+          &CodeViewWidget::OnDebugFontChanged);
 
   connect(&Settings::Instance(), &Settings::EmulationStateChanged, this, [this] {
     m_address = m_system.GetPPCState().pc;
@@ -183,6 +183,8 @@ CodeViewWidget::CodeViewWidget() : m_system(Core::System::GetInstance())
     m_address = m_system.GetPPCState().pc;
     Update();
   });
+  connect(Host::GetInstance(), &Host::PPCSymbolsChanged, this,
+          qOverload<>(&CodeViewWidget::Update));
 
   connect(&Settings::Instance(), &Settings::ThemeChanged, this,
           qOverload<>(&CodeViewWidget::Update));
@@ -207,7 +209,7 @@ void CodeViewWidget::FontBasedSizing()
   // just text width is too small with some fonts, so increase by a bit
   constexpr int extra_text_width = 8;
 
-  const QFontMetrics fm(Settings::Instance().GetDebugFont());
+  const QFontMetrics fm(font());
 
   const int rowh = fm.height() + 1;
   verticalHeader()->setMaximumSectionSize(rowh);
@@ -265,7 +267,7 @@ void CodeViewWidget::Update()
   if (m_updating)
     return;
 
-  if (Core::GetState() == Core::State::Paused)
+  if (Core::GetState(m_system) == Core::State::Paused)
   {
     Core::CPUThreadGuard guard(m_system);
     Update(&guard);
@@ -382,7 +384,7 @@ void CodeViewWidget::Update(const Core::CPUThreadGuard* guard)
     if (debug_interface.IsBreakpoint(addr))
     {
       auto icon = Resources::GetThemeIcon("debugger_breakpoint").pixmap(QSize(rowh - 2, rowh - 2));
-      if (!m_system.GetPowerPC().GetBreakPoints().IsBreakPointEnable(addr))
+      if (!power_pc.GetBreakPoints().IsBreakPointEnable(addr))
       {
         QPixmap disabled_icon(icon.size());
         disabled_icon.fill(Qt::transparent);
@@ -410,7 +412,7 @@ void CodeViewWidget::Update(const Core::CPUThreadGuard* guard)
 
   CalculateBranchIndentation();
 
-  g_symbolDB.FillInCallers();
+  m_ppc_symbol_db.FillInCallers();
 
   repaint();
   m_updating = false;
@@ -556,12 +558,12 @@ void CodeViewWidget::OnContextMenu()
 {
   QMenu* menu = new QMenu(this);
 
-  const bool running = Core::GetState() != Core::State::Uninitialized;
-  const bool paused = Core::GetState() == Core::State::Paused;
+  const bool running = Core::GetState(m_system) != Core::State::Uninitialized;
+  const bool paused = Core::GetState(m_system) == Core::State::Paused;
 
   const u32 addr = GetContextAddress();
 
-  bool has_symbol = g_symbolDB.GetSymbolFromAddr(addr);
+  const bool has_symbol = m_ppc_symbol_db.GetSymbolFromAddr(addr);
 
   auto* follow_branch_action =
       menu->addAction(tr("Follow &branch"), this, &CodeViewWidget::OnFollowBranch);
@@ -744,6 +746,12 @@ void CodeViewWidget::AutoStep(CodeTrace::AutoStop option)
   } while (msgbox.clickedButton() == (QAbstractButton*)run_button);
 }
 
+void CodeViewWidget::OnDebugFontChanged(const QFont& font)
+{
+  setFont(font);
+  FontBasedSizing();
+}
+
 void CodeViewWidget::OnCopyAddress()
 {
   const u32 addr = GetContextAddress();
@@ -753,7 +761,7 @@ void CodeViewWidget::OnCopyAddress()
 
 void CodeViewWidget::OnCopyTargetAddress()
 {
-  if (Core::GetState() != Core::State::Paused)
+  if (Core::GetState(m_system) != Core::State::Paused)
     return;
 
   const u32 addr = GetContextAddress();
@@ -783,7 +791,7 @@ void CodeViewWidget::OnShowInMemory()
 
 void CodeViewWidget::OnShowTargetInMemory()
 {
-  if (Core::GetState() != Core::State::Paused)
+  if (Core::GetState(m_system) != Core::State::Paused)
     return;
 
   const u32 addr = GetContextAddress();
@@ -819,7 +827,7 @@ void CodeViewWidget::OnCopyFunction()
 {
   const u32 address = GetContextAddress();
 
-  const Common::Symbol* symbol = g_symbolDB.GetSymbolFromAddr(address);
+  const Common::Symbol* const symbol = m_ppc_symbol_db.GetSymbolFromAddr(address);
   if (!symbol)
     return;
 
@@ -877,9 +885,8 @@ void CodeViewWidget::OnAddFunction()
 
   Core::CPUThreadGuard guard(m_system);
 
-  g_symbolDB.AddFunction(guard, addr);
-  emit SymbolsChanged();
-  Update(&guard);
+  m_ppc_symbol_db.AddFunction(guard, addr);
+  emit Host::GetInstance()->PPCSymbolsChanged();
 }
 
 void CodeViewWidget::OnInsertBLR()
@@ -915,7 +922,7 @@ void CodeViewWidget::OnRenameSymbol()
 {
   const u32 addr = GetContextAddress();
 
-  Common::Symbol* const symbol = g_symbolDB.GetSymbolFromAddr(addr);
+  Common::Symbol* const symbol = m_ppc_symbol_db.GetSymbolFromAddr(addr);
 
   if (!symbol)
     return;
@@ -928,8 +935,7 @@ void CodeViewWidget::OnRenameSymbol()
   if (good && !name.isEmpty())
   {
     symbol->Rename(name.toStdString());
-    emit SymbolsChanged();
-    Update();
+    emit Host::GetInstance()->PPCSymbolsChanged();
   }
 }
 
@@ -950,7 +956,7 @@ void CodeViewWidget::OnSetSymbolSize()
 {
   const u32 addr = GetContextAddress();
 
-  Common::Symbol* const symbol = g_symbolDB.GetSymbolFromAddr(addr);
+  Common::Symbol* const symbol = m_ppc_symbol_db.GetSymbolFromAddr(addr);
 
   if (!symbol)
     return;
@@ -967,15 +973,14 @@ void CodeViewWidget::OnSetSymbolSize()
   Core::CPUThreadGuard guard(m_system);
 
   PPCAnalyst::ReanalyzeFunction(guard, symbol->address, *symbol, size);
-  emit SymbolsChanged();
-  Update(&guard);
+  emit Host::GetInstance()->PPCSymbolsChanged();
 }
 
 void CodeViewWidget::OnSetSymbolEndAddress()
 {
   const u32 addr = GetContextAddress();
 
-  Common::Symbol* const symbol = g_symbolDB.GetSymbolFromAddr(addr);
+  Common::Symbol* const symbol = m_ppc_symbol_db.GetSymbolFromAddr(addr);
 
   if (!symbol)
     return;
@@ -995,8 +1000,7 @@ void CodeViewWidget::OnSetSymbolEndAddress()
   Core::CPUThreadGuard guard(m_system);
 
   PPCAnalyst::ReanalyzeFunction(guard, symbol->address, *symbol, address - symbol->address);
-  emit SymbolsChanged();
-  Update(&guard);
+  emit Host::GetInstance()->PPCSymbolsChanged();
 }
 
 void CodeViewWidget::OnReplaceInstruction()
