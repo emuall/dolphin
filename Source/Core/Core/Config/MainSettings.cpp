@@ -18,7 +18,7 @@
 #include "Common/MathUtil.h"
 #include "Common/StringUtil.h"
 #include "Common/Version.h"
-#include "Core/Config/AchievementSettings.h"
+#include "Core/AchievementManager.h"
 #include "Core/Config/DefaultLocale.h"
 #include "Core/HW/EXI/EXI.h"
 #include "Core/HW/EXI/EXI_Device.h"
@@ -509,6 +509,8 @@ const Info<bool> MAIN_DEBUG_JIT_SYSTEM_REGISTERS_OFF{
 const Info<bool> MAIN_DEBUG_JIT_BRANCH_OFF{{System::Main, "Debug", "JitBranchOff"}, false};
 const Info<bool> MAIN_DEBUG_JIT_REGISTER_CACHE_OFF{{System::Main, "Debug", "JitRegisterCacheOff"},
                                                    false};
+const Info<bool> MAIN_DEBUG_JIT_ENABLE_PROFILING{{System::Main, "Debug", "JitEnableProfiling"},
+                                                 false};
 
 // Main.BluetoothPassthrough
 
@@ -748,7 +750,8 @@ bool IsDefaultGCIFolderPathConfigured(ExpansionInterface::Slot slot)
 bool AreCheatsEnabled()
 {
 #ifdef USE_RETRO_ACHIEVEMENTS
-  return Config::Get(::Config::MAIN_ENABLE_CHEATS) && !::Config::Get(::Config::RA_HARDCORE_ENABLED);
+  return Config::Get(::Config::MAIN_ENABLE_CHEATS) &&
+         !AchievementManager::GetInstance().IsHardcoreModeActive();
 #else   // USE_RETRO_ACHIEVEMENTS
   return Config::Get(::Config::MAIN_ENABLE_CHEATS);
 #endif  // USE_RETRO_ACHIEVEMENTS
@@ -758,7 +761,7 @@ bool IsDebuggingEnabled()
 {
 #ifdef USE_RETRO_ACHIEVEMENTS
   return Config::Get(::Config::MAIN_ENABLE_DEBUGGING) &&
-         !::Config::Get(::Config::RA_HARDCORE_ENABLED);
+         !AchievementManager::GetInstance().IsHardcoreModeActive();
 #else   // USE_RETRO_ACHIEVEMENTS
   return Config::Get(::Config::MAIN_ENABLE_DEBUGGING);
 #endif  // USE_RETRO_ACHIEVEMENTS

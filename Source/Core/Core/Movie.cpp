@@ -34,6 +34,7 @@
 #include "Common/Timer.h"
 #include "Common/Version.h"
 
+#include "Core/AchievementManager.h"
 #include "Core/Boot/Boot.h"
 #include "Core/Config/AchievementSettings.h"
 #include "Core/Config/MainSettings.h"
@@ -424,7 +425,7 @@ bool MovieManager::IsNetPlayRecording() const
 // NOTE: Host Thread
 void MovieManager::ChangePads()
 {
-  if (!Core::IsRunning())
+  if (!Core::IsRunning(m_system))
     return;
 
   ControllerTypeArray controllers{};
@@ -571,7 +572,7 @@ bool MovieManager::BeginRecordingInput(const ControllerTypeArray& controllers,
     ConfigLoaders::SaveToDTM(&header);
     Config::AddLayer(ConfigLoaders::GenerateMovieConfigLoader(&header));
 
-    if (Core::IsRunning())
+    if (Core::IsRunning(m_system))
       Core::UpdateWantDeterminism(m_system);
   };
   Core::RunOnCPUThread(m_system, start_recording, true);
@@ -941,7 +942,7 @@ bool MovieManager::PlayInput(const std::string& movie_path,
   ReadHeader();
 
 #ifdef USE_RETRO_ACHIEVEMENTS
-  if (Config::Get(Config::RA_HARDCORE_ENABLED))
+  if (AchievementManager::GetInstance().IsHardcoreModeActive())
     return false;
 #endif  // USE_RETRO_ACHIEVEMENTS
 

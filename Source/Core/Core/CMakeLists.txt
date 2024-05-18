@@ -523,7 +523,6 @@ add_library(core
   PowerPC/PPCSymbolDB.h
   PowerPC/PPCTables.cpp
   PowerPC/PPCTables.h
-  PowerPC/Profiler.h
   PowerPC/SignatureDB/CSVSignatureDB.cpp
   PowerPC/SignatureDB/CSVSignatureDB.h
   PowerPC/SignatureDB/DSYSignatureDB.cpp
@@ -750,6 +749,12 @@ if(CMAKE_SYSTEM_NAME MATCHES "Linux")
   else()
     message(STATUS "BlueZ explicitly disabled, disabling bluetooth support")
   endif()
+endif()
+
+if(CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
+  # OpenBSD doesn't allow memory to be both writable and executable by default.
+  # The JIT currently needs this.
+  target_link_options(core PUBLIC -Wl,-zwxneeded)
 endif()
 
 if(TARGET Hidapi::Hidapi)

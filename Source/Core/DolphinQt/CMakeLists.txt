@@ -28,6 +28,8 @@ add_executable(dolphin-emu
   CheatSearchWidget.h
   CheatsManager.cpp
   CheatsManager.h
+  Achievements/AchievementBox.cpp
+  Achievements/AchievementBox.h
   Achievements/AchievementHeaderWidget.cpp
   Achievements/AchievementHeaderWidget.h
   Achievements/AchievementLeaderboardWidget.cpp
@@ -303,6 +305,7 @@ add_executable(dolphin-emu
   QtUtils/ElidedButton.h
   QtUtils/FileOpenEventFilter.cpp
   QtUtils/FileOpenEventFilter.h
+  QtUtils/FromStdString.h
   QtUtils/ImageConverter.cpp
   QtUtils/ImageConverter.h
   QtUtils/ModalMessageBox.cpp
@@ -611,8 +614,8 @@ if(APPLE)
     if(USE_BUNDLED_MOLTENVK)
       add_dependencies(dolphin-emu MoltenVK)
       ExternalProject_Get_Property(MoltenVK SOURCE_DIR)
-      target_sources(dolphin-emu PRIVATE "${SOURCE_DIR}/Package/Release/MoltenVK/dylib/macOS/libMoltenVK.dylib")
-      set_source_files_properties("${SOURCE_DIR}/Package/Release/MoltenVK/dylib/macOS/libMoltenVK.dylib" PROPERTIES MACOSX_PACKAGE_LOCATION Frameworks GENERATED ON)
+      target_sources(dolphin-emu PRIVATE "${SOURCE_DIR}/Package/Release/MoltenVK/dynamic/dylib/macOS/libMoltenVK.dylib")
+      set_source_files_properties("${SOURCE_DIR}/Package/Release/MoltenVK/dynamic/dylib/macOS/libMoltenVK.dylib" PROPERTIES MACOSX_PACKAGE_LOCATION Frameworks GENERATED ON)
     else()
       find_file(MOLTENVK_DYLIB NAMES libMoltenVK.dylib PATH_SUFFIXES lib)
       if(NOT MOLTENVK_DYLIB)

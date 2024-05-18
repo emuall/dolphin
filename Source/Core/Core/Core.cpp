@@ -190,7 +190,7 @@ std::string StopMessage(bool main_thread, std::string_view message)
 
 void DisplayMessage(std::string message, int time_in_ms)
 {
-  if (!IsRunning())
+  if (!IsRunning(Core::System::GetInstance()))
     return;
 
   // Actually displaying non-ASCII could cause things to go pear-shaped
@@ -200,9 +200,8 @@ void DisplayMessage(std::string message, int time_in_ms)
   OSD::AddMessage(std::move(message), time_in_ms);
 }
 
-bool IsRunning()
+bool IsRunning(Core::System& system)
 {
-  auto& system = Core::System::GetInstance();
   return (GetState(system) != State::Uninitialized || s_hardware_initialized) && !s_is_stopping;
 }
 
@@ -237,7 +236,7 @@ bool Init(Core::System& system, std::unique_ptr<BootParameters> boot, const Wind
 {
   if (s_emu_thread.joinable())
   {
-    if (IsRunning())
+    if (IsRunning(system))
     {
       PanicAlertFmtT("Emu Thread already running");
       return false;
@@ -290,7 +289,6 @@ void Stop(Core::System& system)  // - Hammertime!
 
 #ifdef USE_RETRO_ACHIEVEMENTS
   AchievementManager::GetInstance().CloseGame();
-  AchievementManager::GetInstance().SetDisabled(false);
 #endif  // USE_RETRO_ACHIEVEMENTS
 
   s_is_stopping = true;
@@ -356,9 +354,9 @@ static void CPUSetInitialExecutionState(bool force_paused = false)
 {
   // The CPU starts in stepping state, and will wait until a new state is set before executing.
   // SetState must be called on the host thread, so we defer it for later.
-  QueueHostJob([force_paused](Core::System&) {
+  QueueHostJob([force_paused](Core::System& system) {
     bool paused = SConfig::GetInstance().bBootToPause || force_paused;
-    SetState(paused ? State::Paused : State::Running);
+    SetState(system, paused ? State::Paused : State::Running);
     Host_UpdateDisasmDialog();
     Host_UpdateMainFrame();
     Host_Message(HostMessageID::WMUserCreate);
@@ -702,13 +700,12 @@ static void EmuThread(Core::System& system, std::unique_ptr<BootParameters> boot
 
 // Set or get the running state
 
-void SetState(State state, bool report_state_change)
+void SetState(Core::System& system, State state, bool report_state_change)
 {
   // State cannot be controlled until the CPU Thread is operational
   if (!IsRunningAndStarted())
     return;
 
-  auto& system = Core::System::GetInstance();
   switch (state)
   {
   case State::Paused:
@@ -843,7 +840,7 @@ static bool PauseAndLock(Core::System& system, bool do_lock, bool unpause_on_unl
 void RunOnCPUThread(Core::System& system, std::function<void()> function, bool wait_for_completion)
 {
   // If the CPU thread is not running, assume there is no active CPU thread we can race against.
-  if (!IsRunning() || IsCPUThread())
+  if (!IsRunning(system) || IsCPUThread())
   {
     function();
     return;
@@ -1039,7 +1036,7 @@ void HostDispatchJobs(Core::System& system)
     //   Core::State::Uninitialized: s_is_booting -> s_hardware_initialized
     //   We need to check variables in the same order as the state
     //   transition, otherwise we race and get transient failures.
-    if (!job.run_after_stop && !s_is_booting.IsSet() && !IsRunning())
+    if (!job.run_after_stop && !s_is_booting.IsSet() && !IsRunning(system))
       continue;
 
     guard.unlock();
@@ -1063,12 +1060,12 @@ void DoFrameStep(Core::System& system)
     // if already paused, frame advance for 1 frame
     s_stop_frame_step = false;
     s_frame_step = true;
-    SetState(State::Running, false);
+    SetState(system, State::Running, false);
   }
   else if (!s_frame_step)
   {
     // if not paused yet, pause immediately instead
-    SetState(State::Paused);
+    SetState(system, State::Paused);
   }
 }
 

@@ -299,7 +299,7 @@ void VideoBackendBase::PopulateBackendInfoFromUI(const WindowSystemInfo& wsi)
 {
   // If the core is running, the backend info will have been populated already.
   // If we did it here, the UI thread can race with the with the GPU thread.
-  if (!Core::IsRunning())
+  if (!Core::IsRunning(Core::System::GetInstance()))
     PopulateBackendInfo(wsi);
 }
 
@@ -344,7 +344,7 @@ bool VideoBackendBase::InitializeShared(std::unique_ptr<AbstractGfx> gfx,
 {
   memset(reinterpret_cast<u8*>(&g_main_cp_state), 0, sizeof(g_main_cp_state));
   memset(reinterpret_cast<u8*>(&g_preprocess_cp_state), 0, sizeof(g_preprocess_cp_state));
-  memset(texMem, 0, TMEM_SIZE);
+  s_tex_mem.fill(0);
 
   // do not initialize again for the config window
   m_initialized = true;

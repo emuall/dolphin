@@ -316,7 +316,7 @@ void CachedInterpreter::Jit(u32 address)
   js.numFloatingPointInst = 0;
   js.curBlock = b;
 
-  b->normalEntry = GetCodePtr();
+  b->normalEntry = b->near_begin = GetCodePtr();
 
   for (u32 i = 0; i < code_block.m_num_instructions; i++)
   {
@@ -364,8 +364,10 @@ void CachedInterpreter::Jit(u32 address)
       if (endblock)
       {
         m_code.emplace_back(EndBlock, js.downcountAmount);
-        m_code.emplace_back(UpdateNumLoadStoreInstructions, js.numLoadStoreInst);
-        m_code.emplace_back(UpdateNumFloatingPointInstructions, js.numFloatingPointInst);
+        if (js.numLoadStoreInst != 0)
+          m_code.emplace_back(UpdateNumLoadStoreInstructions, js.numLoadStoreInst);
+        if (js.numFloatingPointInst != 0)
+          m_code.emplace_back(UpdateNumFloatingPointInstructions, js.numFloatingPointInst);
       }
     }
   }
@@ -373,10 +375,16 @@ void CachedInterpreter::Jit(u32 address)
   {
     m_code.emplace_back(WriteBrokenBlockNPC, nextPC);
     m_code.emplace_back(EndBlock, js.downcountAmount);
-    m_code.emplace_back(UpdateNumLoadStoreInstructions, js.numLoadStoreInst);
-    m_code.emplace_back(UpdateNumFloatingPointInstructions, js.numFloatingPointInst);
+    if (js.numLoadStoreInst != 0)
+      m_code.emplace_back(UpdateNumLoadStoreInstructions, js.numLoadStoreInst);
+    if (js.numFloatingPointInst != 0)
+      m_code.emplace_back(UpdateNumFloatingPointInstructions, js.numFloatingPointInst);
   }
   m_code.emplace_back();
+
+  b->near_end = GetCodePtr();
+  b->far_begin = nullptr;
+  b->far_end = nullptr;
 
   b->codeSize = static_cast<u32>(GetCodePtr() - b->normalEntry);
   b->originalSize = code_block.m_num_instructions;

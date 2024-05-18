@@ -200,6 +200,7 @@ void MemoryWidget::CreateWidgets()
   m_display_combo->addItem(tr("Double"), int(Type::Double));
 
   m_align_combo = new QComboBox;
+  // i18n: "Fixed" here means that the alignment is always the same
   m_align_combo->addItem(tr("Fixed Alignment"));
   m_align_combo->addItem(tr("Type-based Alignment"), 0);
   m_align_combo->addItem(tr("No Alignment"), 1);
@@ -628,7 +629,7 @@ QByteArray MemoryWidget::GetInputData() const
 
 void MemoryWidget::OnSetValue()
 {
-  if (!Core::IsRunning())
+  if (!Core::IsRunning(m_system))
     return;
 
   auto target_addr = GetTargetAddress();
@@ -674,7 +675,7 @@ void MemoryWidget::OnSetValue()
 
 void MemoryWidget::OnSetValueFromFile()
 {
-  if (!Core::IsRunning())
+  if (!Core::IsRunning(m_system))
     return;
 
   auto target_addr = GetTargetAddress();

@@ -16,7 +16,7 @@
 #include "Common/GekkoDisassembler.h"
 #include "Common/StringUtil.h"
 
-#include "Core/Config/AchievementSettings.h"
+#include "Core/AchievementManager.h"
 #include "Core/Config/MainSettings.h"
 #include "Core/Core.h"
 #include "Core/Debugger/OSThread.h"
@@ -31,7 +31,7 @@ void ApplyMemoryPatch(const Core::CPUThreadGuard& guard, Common::Debug::MemoryPa
                       bool store_existing_value)
 {
 #ifdef USE_RETRO_ACHIEVEMENTS
-  if (Config::Get(Config::RA_HARDCORE_ENABLED))
+  if (AchievementManager::GetInstance().IsHardcoreModeActive())
     return;
 #endif  // USE_RETRO_ACHIEVEMENTS
   if (patch.value.empty())
@@ -442,7 +442,7 @@ u32 PPCDebugInterface::GetColor(const Core::CPUThreadGuard* guard, u32 address) 
 }
 // =============
 
-std::string PPCDebugInterface::GetDescription(u32 address) const
+std::string_view PPCDebugInterface::GetDescription(u32 address) const
 {
   return m_ppc_symbol_db.GetDescription(address);
 }
